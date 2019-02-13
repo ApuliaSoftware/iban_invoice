@@ -9,9 +9,7 @@ class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
 
-    @api.onchange('partner_id',
-                  'company_id.partner_id.bank_transfer_account',
-                  'company_id.partner_id.bank_ids')
+    @api.onchange('partner_id')
     def change_partner_id(self):
         self.partner_bank_id = False
         # ---- Checks if the field bank_transfer_account specifics the main bank
