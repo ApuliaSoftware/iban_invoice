@@ -15,16 +15,17 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self)._prepare_invoice()
         if self.partner_id:
             partner_bank_id = False
-            print(partner_bank_id)
             if self.partner_id.bank_transfer_account:
                 partner_bank_id = \
                     self.partner_id.bank_transfer_account
             else:
-                for bank in self.company_id.partner_id.bank_ids:
-                    if bank.main_bank_transfer_account and not\
-                            self.partner_bank_id:
-                        partner_bank_id = bank
+                acc_bank = self.env['res.partner.bank'].search([
+                    ('main_bank_transfer_account', '=', True)], limit=1)
+                if acc_bank:
+                    partner_bank_id = acc_bank
             if not partner_bank_id:
-                partner_bank_id = self.company_id.partner_id.bank_ids[0]
-            res.update({'partner_bank_id': partner_bank_id.id})
+                if self.company_id.partner_id.bank_ids:
+                    partner_bank_id = self.company_id.partner_id.bank_ids[0]
+            if partner_bank_id:
+                res.update({'partner_bank_id': partner_bank_id.id})
             return res

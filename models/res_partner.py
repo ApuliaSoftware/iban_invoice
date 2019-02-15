@@ -2,7 +2,8 @@
 # Copyright 2019 Ilaria Franchini <i.franchini@apuliasoftware.it>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import Warning as UserError
 
 
 class ResPartner(models.Model):

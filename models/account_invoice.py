@@ -11,16 +11,18 @@ class AccountInvoice(models.Model):
 
     @api.onchange('partner_id')
     def change_partner_id(self):
-        self.partner_bank_id = False
         # ---- Checks if the field bank_transfer_account specifics the main bank
         if self.partner_id.bank_transfer_account:
             self.partner_bank_id =\
                 self.partner_id.bank_transfer_account
         else:
             # ----Checks if a company bank is set as main bank transfer
-            for bank in self.company_id.partner_id.bank_ids:
-                if bank.main_bank_transfer_account and not self.partner_bank_id:
-                    self.partner_bank_id = bank
-        # ---- If there isn't a main bank trasfer, it takes the first
-        if not self.partner_bank_id:
-            self.partner_bank_id = self.company_id.partner_id.bank_ids[0]
+            acc_bank = self.env['res.partner.bank'].search([
+                ('main_bank_transfer_account', '=', True)], limit=1)
+            if acc_bank:
+                self.partner_bank_id = acc_bank
+        # ---- If there isn't a main bank transfer, it takes the first
+            else:
+                if self.company_id.partner_id.bank_ids:
+                    self.partner_bank_id = self.company_id.partner_id.bank_ids[
+                        0]

@@ -16,7 +16,8 @@
     ],
     "data": [
         'views/partner_view.xml',
-        'views/account_invoice.xml'
+        'views/account_invoice.xml',
+        'data/account_bank_menu.xml'
     ],
     'installable': True,
 }
