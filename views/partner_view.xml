@@ -20,7 +20,8 @@
             <field name="inherit_id" ref="base.view_partner_bank_form"/>
             <field name="arch" type="xml">
                 <field name="company_id" position="after">
-                    <field name="is_company_bank" attrs="{'invisible':1}"/>
+                    <field name="is_company_bank"
+                           attrs="{'invisible':1}"/>
                     <field name="main_bank_transfer_account"
                            attrs="{'invisible': [('is_company_bank', '=', False)]}"/>
                 </field>
