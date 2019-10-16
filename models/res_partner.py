@@ -18,6 +18,7 @@ class ResPartnerBank(models.Model):
     _inherit = "res.partner.bank"
 
     main_bank_transfer_account = fields.Boolean()
+    active = fields.Boolean(default=True)
     is_company_bank = fields.Boolean(compute='_get_company_partner',
                                      default=False, store=True)
 
