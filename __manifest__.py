@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Iban invoice",
-    "version": "10.0.1.2.0",
+    "version": "10.0.1.3.0",
     "description": "This module defines the bank account to be displayed in the invoice print.",
     "category": "Account",
     "website": "http://www.apuliasoftware.it",

@@ -19,6 +19,7 @@ class ResPartnerBank(models.Model):
 
     active = fields.Boolean(default=True)
     main_bank_transfer_account = fields.Boolean()
+    active = fields.Boolean(default=True)
     is_company_bank = fields.Boolean(compute='_get_company_partner',
                                      default=False, store=True)
 

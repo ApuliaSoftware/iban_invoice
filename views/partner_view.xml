@@ -14,6 +14,17 @@
             </field>
         </record>
 
+        <record id="iban_invoice_res_bartner_bank_search" model="ir.ui.view">
+            <field name="name">iban.invoice.partner.bank.search</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_search"/>
+            <field name="arch" type="xml">
+               <xpath expr="//search" position="inside">
+                   <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+               </xpath>
+            </field>
+       </record>
+
         <record id="iban_invoice_partner_bank_form" model="ir.ui.view">
             <field name="name">iban.invoice.res.partner.bank.form</field>
             <field name="model">res.partner.bank</field>
@@ -21,7 +32,7 @@
             <field name="arch" type="xml">
                 <field name="company_id" position="after">
                     <field name="is_company_bank" attrs="{'invisible':1}"/>
-                    <field name="main_bank_transfer_account"
+                    <field name="main_bank_transfer_account" 
 			    attrs="{'invisible': [('is_company_bank', '=', False)]}"/>
 		    <field name="active"/>
                 </field>
