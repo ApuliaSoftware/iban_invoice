@@ -22,7 +22,8 @@
                 <field name="company_id" position="after">
                     <field name="is_company_bank" attrs="{'invisible':1}"/>
                     <field name="main_bank_transfer_account"
-                           attrs="{'invisible': [('is_company_bank', '=', False)]}"/>
+			    attrs="{'invisible': [('is_company_bank', '=', False)]}"/>
+		    <field name="active"/>
                 </field>
             </field>
         </record>

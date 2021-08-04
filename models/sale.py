@@ -20,7 +20,9 @@ class SaleOrder(models.Model):
                     self.partner_id.bank_transfer_account
             else:
                 acc_bank = self.env['res.partner.bank'].search([
-                    ('main_bank_transfer_account', '=', True)], limit=1)
+                    ('main_bank_transfer_account', '=', True),
+                    ('company_id', '=', self.company_id.id)
+                ], limit=1)
                 if acc_bank:
                     partner_bank_id = acc_bank
             if not partner_bank_id:

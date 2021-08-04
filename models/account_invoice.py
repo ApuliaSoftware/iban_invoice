@@ -18,7 +18,9 @@ class AccountInvoice(models.Model):
         else:
             # ----Checks if a company bank is set as main bank transfer
             acc_bank = self.env['res.partner.bank'].search([
-                ('main_bank_transfer_account', '=', True)], limit=1)
+                ('main_bank_transfer_account', '=', True), 
+                ('company_id', '=', self.company_id.id),
+            ], limit=1)
             if acc_bank:
                 self.partner_bank_id = acc_bank
         # ---- If there isn't a main bank transfer, it takes the first
